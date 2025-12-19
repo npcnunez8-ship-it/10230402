@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login – Snackify</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 16px;
+    }
+    .card {
+      background: #020617;
+      border-radius: 16px;
+      padding: 24px 20px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.7);
+      border: 1px solid #1f2937;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 1.5rem;
+    }
+    .subtitle {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      background: #020617;
+      color: #e5e7eb;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+    input:focus {
+      outline: none;
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px #22c55e33;
+    }
+    button {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 9999px;
+      border: none;
+      background: #22c55e;
+      color: #022c22;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      font-size: 0.95rem;
+    }
+    button.secondary {
+      background: transparent;
+      color: #9ca3af;
+      border: 1px solid #4b5563;
+      margin-top: 8px;
+    }
+    button:hover {
+      filter: brightness(1.05);
+    }
+    .tabs {
+      display: flex;
+      margin-bottom: 16px;
+      border-radius: 9999px;
+      background: #020617;
+      border: 1px solid #1f2937;
+      padding: 2px;
+    }
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 8px 0;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    .tab.active {
+      background: #111827;
+      color: #e5e7eb;
+    }
+    .message {
+      font-size: 0.85rem;
+      margin-top: 8px;
+      min-height: 18px;
+    }
+    .message.error {
+      color: #f97373;
+    }
+    .message.success {
+      color: #4ade80;
+    }
+    .user-info {
+      margin-top: 16px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #020617;
+      border: 1px solid #1f2937;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+    .hidden { display: none; }
+    a {
+      color: #22c55e;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Welcome back</h1>
+    <p class="subtitle">Sign in to rate and comment on snacks.</p>
+
+    <div class="tabs">
+      <div class="tab active" id="tab-login">Login</div>
+      <div class="tab" id="tab-signup">Sign up</div>
+    </div>
+
+    <form id="auth-form">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="you@example.com" required />
+
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="********" required minlength="6" />
+
+      <button type="submit" id="submit-btn">Login</button>
+      <button type="button" class="secondary hidden" id="logout-btn">Log out</button>
+
+      <div class="message" id="message"></div>
+    </form>
+
+    <div class="user-info hidden" id="user-info">
+      Logged in as <strong id="user-email"></strong>
+      <div style="margin-top:4px;">
+        <a href="/">← Back to Snackify</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase browser client via CDN -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2.48.0/dist/umd/supabase.min.js"></script>
+  <script>
+    // IMPORTANT: replace this anon key with your real one from Supabase dashboard (Project Settings -> API -> anon public)
+    const SUPABASE_URL = 'https://fxfwogjutigjeachygjr.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ4ZndvZ2p1dGlnamVhY2h5Z2pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYxNjExNzcsImV4cCI6MjA4MTczNzE3N30.8CTvARa71saNOZEzebtqKwpnQgM-NXDsknD_fRu27Pw';
+
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById('auth-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const messageEl = document.getElementById('message');
+    const userInfo = document.getElementById('user-info');
+    const userEmailEl = document.getElementById('user-email');
+    const logoutBtn = document.getElementById('logout-btn');
+    const submitBtn = document.getElementById('submit-btn');
+
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup = document.getElementById('tab-signup');
+
+    let mode = 'login'; // 'login' or 'signup'
+
+    function setMode(newMode) {
+      mode = newMode;
+      if (mode === 'login') {
+        tabLogin.classList.add('active');
+        tabSignup.classList.remove('active');
+        submitBtn.textContent = 'Login';
+      } else {
+        tabLogin.classList.remove('active');
+        tabSignup.classList.add('active');
+        submitBtn.textContent = 'Create account';
+      }
+      clearMessage();
+    }
+
+    function showMessage(text, type = 'info') {
+      messageEl.textContent = text;
+      messageEl.classList.remove('error', 'success');
+      if (type === 'error') messageEl.classList.add('error');
+      if (type === 'success') messageEl.classList.add('success');
+    }
+
+    function clearMessage() {
+      messageEl.textContent = '';
+      messageEl.classList.remove('error', 'success');
+    }
+
+    function setLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      submitBtn.textContent = isLoading
+        ? (mode === 'login' ? 'Logging in…' : 'Creating account…')
+        : (mode === 'login' ? 'Login' : 'Create account');
+    }
+
+    async function refreshUser() {
+      const { data: { session } } = await client.auth.getSession();
+
+      if (session && session.user) {
+        userInfo.classList.remove('hidden');
+        logoutBtn.classList.remove('hidden');
+        userEmailEl.textContent = session.user.email;
+      } else {
+        userInfo.classList.add('hidden');
+        logoutBtn.classList.add('hidden');
+        userEmailEl.textContent = '';
+      }
+    }
+
+    tabLogin.addEventListener('click', () => setMode('login'));
+    tabSignup.addEventListener('click', () => setMode('signup'));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearMessage();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        showMessage('Please enter email and password.', 'error');
+        return;
+      }
+
+      try {
+        setLoading(true);
+
+        if (mode === 'signup') {
+          const { error } = await client.auth.signUp({ email, password });
+          if (error) throw error;
+
+          showMessage('Account created. Check your email for confirmation link.', 'success');
+        } else {
+          const { error } = await client.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+
+          showMessage('Logged in successfully.', 'success');
+        }
+
+        await refreshUser();
+      } catch (err) {
+        console.error(err);
+        showMessage(err.message || 'Something went wrong.', 'error');
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+      try {
+        await client.auth.signOut();
+        showMessage('Logged out.', 'success');
+        await refreshUser();
+      } catch (err) {
+        showMessage(err.message || 'Failed to log out.', 'error');
+      }
+    });
+
+    // On load, check if already logged in
+    refreshUser();
+  </script>
+</body>
+</html>

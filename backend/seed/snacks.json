@@ -1,0 +1,135 @@
+[
+  {
+    "id": 1,
+    "name": "Hilsa Curry",
+    "country": "Bangladesh",
+    "description": "A traditional fish curry made with hilsa fish, mustard oil, and spices. A national favorite.",
+    "type": "main",
+    "imageUrl": "https://www.licious.in/blog/wp-content/uploads/2022/08/shutterstock_1810759399.jpg",
+    "photographer": "Photo by Unsplash",
+    "tags": ["spicy", "fish", "curry"],
+    "ratings": { "taste": 4.5, "spiciness": 3.5, "uniqueness": 4.0, "count": 12 }
+  },
+  {
+    "id": 2,
+    "name": "Biryani",
+    "country": "Bangladesh",
+    "description": "Fragrant basmati rice cooked with marinated meat, spices, and herbs. A celebratory dish.",
+    "type": "main",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZa7kBT9cAn9R0tQ6HLDloHKSAAA0z_msbww&s",
+    "photographer": "Photo by Unsplash",
+    "tags": ["rice", "meat", "aromatic"],
+    "ratings": { "taste": 4.8, "spiciness": 2.5, "uniqueness": 4.2, "count": 25 }
+  },
+  {
+    "id": 3,
+    "name": "Bhuna Khichuri",
+    "country": "Bangladesh",
+    "description": "A hearty rice and lentil dish cooked with spices, often served during rainy days.",
+    "type": "main",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNLvRoMD-ztoTL3BQoHX2ZX72mL8wbXQ40-Q&s",
+    "photographer": "Photo by Unsplash",
+    "tags": ["rice", "lentil", "comfort"],
+    "ratings": { "taste": 4.2, "spiciness": 2.0, "uniqueness": 3.5, "count": 8 }
+  },
+  {
+    "id": 4,
+    "name": "Pitha",
+    "country": "Bangladesh",
+    "description": "Traditional rice cakes, sweet or savory, often made during festivals.",
+    "type": "dessert",
+    "imageUrl": "https://images.getrecipekit.com/20241220053044-enjoy.jpg?aspect_ratio=1:1&quality=90&",
+    "photographer": "Photo by Unsplash",
+    "tags": ["sweet", "rice", "traditional"],
+    "ratings": { "taste": 4.3, "spiciness": 1.0, "uniqueness": 4.5, "count": 15 }
+  },
+  {
+    "id": 5,
+    "name": "Butter Chicken",
+    "country": "India",
+    "description": "Creamy tomato-based curry with tender chicken pieces. A global favorite.",
+    "type": "main",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYu23vQeMPj8nHSCvQwA4xd3t9e_WOgJ-6ZQ&s",
+    "photographer": "Photo by Unsplash",
+    "tags": ["chicken", "creamy", "mild"],
+    "ratings": { "taste": 4.7, "spiciness": 2.0, "uniqueness": 3.8, "count": 45 }
+  },
+  {
+    "id": 6,
+    "name": "Masala Dosa",
+    "country": "India",
+    "description": "Crispy fermented crepe filled with spiced potatoes, served with chutneys.",
+    "type": "street food",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Rameshwaram_Cafe_Dosa.jpg",
+    "photographer": "Photo by Unsplash",
+    "tags": ["crispy", "spicy", "vegetarian"],
+    "ratings": { "taste": 4.6, "spiciness": 3.0, "uniqueness": 4.3, "count": 38 }
+  },
+  {
+    "id": 7,
+    "name": "Palak Paneer",
+    "country": "India",
+    "description": "Creamy spinach curry with soft paneer cheese cubes. A vegetarian classic.",
+    "type": "main",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9LEeJ0FgIecAVxyRkkcXKUnd6X1b4pSjENQ&s",
+    "photographer": "Photo by Unsplash",
+    "tags": ["vegetarian", "spinach", "creamy"],
+    "ratings": { "taste": 4.4, "spiciness": 2.5, "uniqueness": 3.9, "count": 32 }
+  },
+  {
+    "id": 8,
+    "name": "Vada Pav",
+    "country": "India",
+    "description": "Mumbai's favorite street food: spiced potato fritter in a soft bun.",
+    "type": "street food",
+    "imageUrl": "https://blog.swiggy.com/wp-content/uploads/2024/11/Image-1_mumbai-vada-pav-1024x538.png",
+    "photographer": "Photo by Unsplash",
+    "tags": ["street food", "spicy", "vegetarian"],
+    "ratings": { "taste": 4.5, "spiciness": 3.5, "uniqueness": 4.1, "count": 28 }
+  },
+  {
+    "id": 9,
+    "name": "Nihari",
+    "country": "Pakistan",
+    "description": "Slow-cooked beef stew with rich spices, traditionally eaten for breakfast.",
+    "type": "main",
+    "imageUrl": "https://i.ndtvimg.com/i/2017-06/nihari_650x400_81498470650.jpg",
+    "photographer": "Photo by Unsplash",
+    "tags": ["beef", "spicy", "slow-cooked"],
+    "ratings": { "taste": 4.6, "spiciness": 4.0, "uniqueness": 4.4, "count": 22 }
+  },
+  {
+    "id": 10,
+    "name": "Haleem",
+    "country": "Pakistan",
+    "description": "Thick, hearty stew of lentils, meat, and wheat, slow-cooked to perfection.",
+    "type": "main",
+    "imageUrl": "https://static01.nyt.com/images/2025/03/24/multimedia/ZS-Haleem-plhg/ZS-Haleem-plhg-mediumSquareAt3X.jpg",
+    "photographer": "Photo by Unsplash",
+    "tags": ["lentil", "meat", "hearty"],
+    "ratings": { "taste": 4.5, "spiciness": 3.0, "uniqueness": 4.2, "count": 18 }
+  },
+  {
+    "id": 11,
+    "name": "Sajji",
+    "country": "Pakistan",
+    "description": "Whole lamb or chicken marinated and slow-roasted over coals. A Balochi specialty.",
+    "type": "main",
+    "imageUrl": "https://www.masala.tv/wp-content/uploads/2021/07/Sajji-pulaoo.jpg",
+    "photographer": "Photo by Unsplash",
+    "tags": ["meat", "roasted", "aromatic"],
+    "ratings": { "taste": 4.8, "spiciness": 3.5, "uniqueness": 4.6, "count": 15 }
+  },
+  {
+    "id": 12,
+    "name": "Chapli Kebab",
+    "country": "Pakistan",
+    "description": "Spiced minced meat patties, pan-fried until crispy. A Peshawari favorite.",
+    "type": "street food",
+    "imageUrl": "https://images.getrecipekit.com/20250908075327-blog-20templates-20-7.webp?aspect_ratio=16:9&quality=90&",
+    "photographer": "Photo by Unsplash",
+    "tags": ["meat", "spicy", "crispy"],
+    "ratings": { "taste": 4.7, "spiciness": 4.2, "uniqueness": 4.3, "count": 20 }
+  }
+]
+

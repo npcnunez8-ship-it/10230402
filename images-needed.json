@@ -1,0 +1,13 @@
+{
+  "note": "This file tracks snack images that need to be sourced or replaced with real photographic images.",
+  "requirements": [
+    "All images must be real photographs (no AI, illustrations, or cartoons)",
+    "Preferred sources: Unsplash, Pexels, Wikimedia Commons, or Google Images (labeled for reuse)",
+    "Each image must include photographer credit",
+    "If an image cannot be found, the snack may be replaced with a similar real dish from another country"
+  ],
+  "status": "All 40 snacks currently have image URLs from Unsplash. If any images fail to load, fallback images will be used automatically.",
+  "images": []
+}
+
+

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snackify - Discover Global Snacks</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>🍽️ Snackify</h1>
+            </div>
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Search snacks..." aria-label="Search snacks">
+            </div>
+            <div class="nav-filters">
+                <select id="countryFilter" aria-label="Filter by country">
+                    <option value="">All Countries</option>
+                </select>
+                <button id="addSnackBtn" class="btn-primary" aria-label="Add new snack">+ Add Snack</button>
+            </div>
+            <div class="nav-user">
+                <div class="user-icon" aria-label="User menu">👤</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Leaderboard Section -->
+        <section class="leaderboard-section" id="leaderboardSection">
+            <h2>🏆 Leaderboards</h2>
+            <div class="leaderboard-tabs">
+                <button class="tab-btn active" data-tab="top-rated">⭐ Top Rated</button>
+                <button class="tab-btn" data-tab="spiciest">🔥 Spiciest</button>
+                <button class="tab-btn" data-tab="unique">🌶️ Most Unique</button>
+                <button class="tab-btn" data-tab="by-country">🌍 By Country</button>
+                <button class="tab-btn" data-tab="sweet">🍬 Sweet Foods</button>
+            </div>
+            <div class="leaderboard-content" id="leaderboardContent"></div>
+        </section>
+
+        <!-- Snacks Grid -->
+        <section class="snacks-section">
+            <h2 id="sectionTitle">All Snacks</h2>
+            <div class="snacks-grid" id="snacksGrid">
+                <!-- Snack cards will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Rating Modal -->
+    <div class="modal" id="ratingModal" role="dialog" aria-labelledby="ratingModalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="ratingModalTitle">Rate Snack</h2>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="ratingForm">
+                    <input type="hidden" id="ratingSnackId">
+                    <div class="rating-input-group">
+                        <label for="tasteRating">Taste (1-5)</label>
+                        <div class="star-rating" id="tasteRating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <input type="number" id="tasteValue" min="1" max="5" value="3" required>
+                    </div>
+                    <div class="rating-input-group">
+                        <label for="spicinessRating">Spiciness (1-5)</label>
+                        <div class="star-rating" id="spicinessRating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <input type="number" id="spicinessValue" min="1" max="5" value="1" required>
+                    </div>
+                    <div class="rating-input-group">
+                        <label for="uniquenessRating">Uniqueness (1-5)</label>
+                        <div class="star-rating" id="uniquenessRating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <input type="number" id="uniquenessValue" min="1" max="5" value="3" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Rating</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Snack Modal -->
+    <div class="modal" id="addSnackModal" role="dialog" aria-labelledby="addSnackModalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="addSnackModalTitle">Add New Snack</h2>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addSnackForm">
+                    <div class="form-group">
+                        <label for="snackName">Snack Name *</label>
+                        <input type="text" id="snackName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="snackCountry">Country *</label>
+                        <select id="snackCountry" required>
+                            <option value="">Select Country</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="snackDescription">Description *</label>
+                        <textarea id="snackDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="snackType">Type *</label>
+                        <select id="snackType" required>
+                            <option value="snack">Snack</option>
+                            <option value="dessert">Dessert</option>
+                            <option value="main">Main</option>
+                            <option value="soup">Soup</option>
+                            <option value="street food">Street Food</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="snackImageUrl">Image URL *</label>
+                        <input type="url" id="snackImageUrl" placeholder="https://..." required>
+                        <small>Must be a real photographic image from Unsplash, Pexels, or similar</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="snackPhotographer">Photographer Credit</label>
+                        <input type="text" id="snackPhotographer" placeholder="Photo by...">
+                    </div>
+                    <div class="form-group">
+                        <label>Initial Ratings</label>
+                        <div class="rating-input-group">
+                            <label for="initTaste">Taste</label>
+                            <input type="number" id="initTaste" min="1" max="5" value="3">
+                        </div>
+                        <div class="rating-input-group">
+                            <label for="initSpiciness">Spiciness</label>
+                            <input type="number" id="initSpiciness" min="1" max="5" value="1">
+                        </div>
+                        <div class="rating-input-group">
+                            <label for="initUniqueness">Uniqueness</label>
+                            <input type="number" id="initUniqueness" min="1" max="5" value="3">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Add Snack</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Snack Details Modal -->
+    <div class="modal" id="detailsModal" role="dialog" aria-labelledby="detailsModalTitle" aria-hidden="true">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 id="detailsModalTitle">Snack Details</h2>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body" id="detailsContent">
+                <!-- Details will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Collage -->
+    <div class="background-collage" aria-hidden="true"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+
+
